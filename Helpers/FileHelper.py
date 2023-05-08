@@ -3,19 +3,8 @@ from Singleton import *
 import csv
 import pandas
 
+
 class FileHelper(metaclass=Singleton):
-    config = {}
-
-    def read_env(self, path=".env"):
-        with open(path) as file:
-            for line in file:
-                name, var = line.partition("=")[::2]
-                self.config[name.strip()] = var
-
-    def save_env(self, path=".env"):
-        with open(path, 'w') as file:
-            file.write(json.dumps(self.config))
-
     def write_log(self, txt, path="Data/log.txt"):
         with open(path, 'a') as file:
             file.write(txt+"\n")
