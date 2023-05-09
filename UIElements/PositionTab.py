@@ -216,6 +216,12 @@ class PositionTab(StrategyTabAbstract):
 
             [lmt_price, ask, bid] = self.get_lmt_price(self.buy_tickers, self.sell_tickers)
             lmt_price = round(lmt_price+0.015*i, 2)
+            if self.check_custom_close_price.isChecked():
+                if self.check_input_is_number(self.input_close_price.text().strip()):
+                    temp_price = float(self.input_close_price.text().strip())
+                    if math.fabs(temp_price - lmt_price) < 0.8:
+                        lmt_price = temp_price
+
             if math.fabs(lmt_price-combo_order.lmtPrice) > 0.01:
                 self.input_close_price.setText(f"{lmt_price}")
                 combo_order.lmtPrice = lmt_price
@@ -270,6 +276,9 @@ class PositionTab(StrategyTabAbstract):
             return
 
         self.current_pos = []
+        self.buy_tickers = []
+        self.sell_tickers = []
+        # self.cancel_all_schedule()
         account_pos = self.ib.reqPositions()
         if account_pos is None or len(account_pos) <= 0:
             self.show_alert("没有持仓信息")
@@ -358,6 +367,12 @@ class PositionTab(StrategyTabAbstract):
         self.label_close_ask.setText(f"{ak}")
         self.label_close_bid.setText(f"{bd}")
         self.label_close_midprice.setText(f"{price}")
+
+    def clear_price_ask_bid_label(self):
+        self.input_close_price.setText("")
+        self.label_close_ask.setText("")
+        self.label_close_bid.setText("")
+        self.label_close_midprice.setText("")
 
     def cancel_all_schedule(self):
         schedule.clear(ScheduleHelper.type_check_close_rate)

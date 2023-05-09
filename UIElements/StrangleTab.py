@@ -457,45 +457,17 @@ class StrangleTab(StrategyTabAbstract):
         self.buy_tickers = []
         self.sell_tickers = []
 
-        txt = self.input_StockQuantity.text().strip()
-        if self.check_buy_stock.isChecked() and not self.check_input_is_number(txt):
-            self.show_alert("请输入正确的股票份额")
-            return
-        stock_quantity = int(txt)
-
         txt = self.input_buy_quantity.text().strip()
         if not self.check_input_is_number(txt):
             self.show_alert("请输入正确的期权购买数量")
             return
         option_quantity = int(txt)
 
-        txt = self.input_order_priceDiff.text().strip()
-        if not self.check_input_is_number(txt):
-            self.show_alert("请输入正确的下单价格偏差")
-            return
-        order_price_diff = round(float(txt), 3)
-
         combo_legs = []
         legs_needed = self.check_buy_leg1.isChecked(), self.check_buy_leg2.isChecked(), self.check_buy_leg3.isChecked(), self.check_buy_leg4.isChecked()
 
         if self.check_buy_stock.isChecked():
             pass
-            # stock_leg = ComboLeg()
-            # stock_leg.conId = self.ticker.contract.conId
-            # stock_leg.ratio = stock_quantity
-            # stock_leg.exchange = "SMART"
-            # stock_leg.action = self.check_buy_sell(self.group_stock_type, True)
-            #
-            # mid_price = TickerReader.get_mid_price(self.ticker)
-            # self.ticker.frozen_mid_price = round(mid_price, 3)
-            # if math.isnan(mid_price) or mid_price <= 0:
-            #     mid_price = self.ticker.marketPrice()
-            # combo_legs.append(stock_leg)
-            #
-            # if stock_leg.action == "SELL":
-            #     lmt_price -= mid_price
-            # else:
-            #     lmt_price += mid_price
 
         for idx, isNeed in enumerate(legs_needed):
             if isNeed:
@@ -507,6 +479,7 @@ class StrangleTab(StrategyTabAbstract):
                 if leg_tmp_ticker is None:
                     self.show_alert(f"leg{idx} 信息错误，请重试")
                     return
+
                 label_iv = self.label_legs_iv[idx]
                 label_sum = self.label_legs_sum[idx]
 
@@ -528,10 +501,13 @@ class StrangleTab(StrategyTabAbstract):
                 else:
                     self.buy_tickers.append(leg_tmp_ticker)
 
-        [lmt_price, ask, bid] = self.get_lmt_price(self.buy_tickers,self.sell_tickers)
-
         if len(combo_legs) <= 0:
             self.show_alert("未选择组合")
+            return
+
+        [lmt_price, ask, bid] = self.get_lmt_price(self.buy_tickers,self.sell_tickers)
+        lmt_price = self.get_order_price(lmt_price)
+        if lmt_price == math.nan:
             return
 
         if len(combo_legs) == 1:
@@ -548,12 +524,25 @@ class StrangleTab(StrategyTabAbstract):
 
         combo_order.totalQuantity = option_quantity
         combo_order.lmtPrice = round(lmt_price, 2)
-        combo_order.discretionaryAmt = 0.02
-        combo_order.percentOffset = 0.02
 
         self.update_price_ask_bid_label(lmt_price, ask, bid)
         self.pending_contract = contract
         self.pending_order = combo_order
+
+    def get_order_price(self, lmt_price: float) -> float:
+        if self.check_custom_buy_price.isChecked():
+            if self.check_input_is_number(self.input_order_price.text().strip()):
+                temp_price = float(self.input_order_price.text().strip())
+                if math.fabs(temp_price - lmt_price) < 0.8:
+                    lmt_price = temp_price
+                else:
+                    self.show_alert(f"自定义{round(temp_price, 2)}与中间{lmt_price}差距过大")
+                    lmt_price = math.nan
+            else:
+                self.show_alert("自定义价格卜者")
+                lmt_price = math.nan
+
+        return lmt_price
 
     def onTickersEvent(self, tickers):
         if self.ticker is None:
@@ -583,8 +572,15 @@ class StrangleTab(StrategyTabAbstract):
             if self.current_trade.isDone():
                 break
             i += 1
+
             [lmt_price, ask, bid] = self.get_lmt_price(self.buy_tickers, self.sell_tickers)
             lmt_price = round(lmt_price + 0.015 * i, 2)
+            if self.check_custom_buy_price.isChecked():
+                if self.check_input_is_number(self.input_order_price.text().strip()):
+                    temp_price = float(self.input_order_price.text().strip())
+                    if math.fabs(temp_price - lmt_price) < 0.8:
+                        lmt_price = temp_price
+
             if math.fabs(lmt_price - self.pending_order.lmtPrice) >= 0.015:
                 self.update_price_ask_bid_label(lmt_price, ask, bid)
                 self.pending_order.lmtPrice = lmt_price
@@ -741,4 +737,4 @@ class StrangleTab(StrategyTabAbstract):
         self.label_stock_interestRate.setText(_translate("MainWindow", "Nan"))
         self.strangle_labelStatus_9.setText(_translate("MainWindow", "期权到期周"))
         self.input_option_DTE_weeks.setText(_translate("MainWindow", "1"))
-        self.btn_update_option_DTE.setText(_translate("MainWindow", "确定"))
+        self.btn_update_option_DTE.setText(_translate("MainWindow", "获取期权日期"))
