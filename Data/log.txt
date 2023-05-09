@@ -55,3 +55,32 @@
 2023-05-09 13:54:18  *  2103  *  Market data farm connection is broken:cashfarm
 2023-05-09 13:54:19  *  2104  *  Market data farm connection is OK:cashfarm
 2023-05-09 13:54:32  *  202  *  Order Canceled - reason:
+2023-05-09 21:37:45  *  2104  *  Market data farm connection is OK:usfarm.nj
+2023-05-09 21:43:42  *  2108  *  Market data farm connection is inactive but should be available upon demand.usfarm.nj
+2023-05-09 21:46:02  *  2105  *  HMDS data farm connection is broken:hkhmds
+2023-05-09 21:46:10  *  2106  *  HMDS data farm connection is OK:hkhmds
+2023-05-09 21:48:03  *  2103  *  Market data farm connection is broken:usfarm.nj
+2023-05-09 21:48:03  *  2157  *  Sec-def data farm connection is broken:secdefhk
+2023-05-09 21:48:03  *  2105  *  HMDS data farm connection is broken:hkhmds
+2023-05-09 21:48:04  *  2158  *  Sec-def data farm connection is OK:secdefhk
+2023-05-09 21:48:04  *  2106  *  HMDS data farm connection is OK:hkhmds
+2023-05-09 21:48:05  *  2104  *  Market data farm connection is OK:hfarm
+2023-05-09 21:48:05  *  2106  *  HMDS data farm connection is OK:ushmds
+2023-05-09 21:48:06  *  2104  *  Market data farm connection is OK:usfarm.nj
+2023-05-09 21:48:07  *  1100  *  Connectivity between IBKR and Trader Workstation has been lost.
+2023-05-09 21:48:07  *  2103  *  Market data farm connection is broken:usfarm.nj
+2023-05-09 21:48:08  *  2157  *  Sec-def data farm connection is broken:secdefhk
+2023-05-09 21:48:08  *  2105  *  HMDS data farm connection is broken:hkhmds
+2023-05-09 21:48:09  *  2158  *  Sec-def data farm connection is OK:secdefhk
+2023-05-09 21:48:09  *  2106  *  HMDS data farm connection is OK:hkhmds
+2023-05-09 21:48:10  *  2104  *  Market data farm connection is OK:hfarm
+2023-05-09 21:48:10  *  2106  *  HMDS data farm connection is OK:ushmds
+2023-05-09 21:48:11  *  2104  *  Market data farm connection is OK:usopt
+2023-05-09 21:48:12  *  1102  *  Connectivity between IBKR and Trader Workstation has been restored - data maintained. All data farms are connected: usfarm.nj; hfarm; usopt; usfarm; hkhmds; ushmds; secdefhk.
+2023-05-09 21:48:16  *  2104  *  Market data farm connection is OK:usfarm.nj
+2023-05-09 21:48:17  *  2106  *  HMDS data farm connection is OK:hkhmds
+2023-05-09 21:48:17  *  2158  *  Sec-def data farm connection is OK:secdefhk
+2023-05-09 21:49:41  *  2104  *  Market data farm connection is OK:usfarm.nj
+2023-05-09 21:49:42  *  2106  *  HMDS data farm connection is OK:hkhmds
+2023-05-09 21:49:43  *  2158  *  Sec-def data farm connection is OK:secdefhk
+2023-05-09 21:49:51  *  300  *  Can't find EId with tickerId:2251

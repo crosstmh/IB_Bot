@@ -16,6 +16,7 @@ class StrategyTabAbstract(QtWidgets.QWidget):
     current_trade: Trade = None
     pending_contract = None
     pending_order = None
+    prev_dte_days = 0
 
     repeat_count = 3
     chain = []
@@ -167,7 +168,8 @@ class StrategyTabAbstract(QtWidgets.QWidget):
         if self.strikes is None or len(self.strikes) <= 0:
             self.getAvailStrikes()
 
-        if self.near_dte is None:
+        if self.near_dte is None and self.prev_dte_days != day_limit:
+            self.prev_dte_days = day_limit
             self.getNearstExpire(day_limit)
 
         strikes = self.strikes
