@@ -54,11 +54,14 @@ class StrategyTabAbstract(QtWidgets.QWidget):
     def getStockData(self, stock_code):
         text = stock_code
         contract = Stock(symbol=text, currency="USD", exchange="SMART",primaryExchange="NASDAQ")
-        if contract and self.ib.qualifyContracts(contract):
-            self.reset_all_stock_relate_data()
-            self.stock = contract
-            self.ticker = self.ib.reqMktData(contract, '', False, False, [])
-            self.ib.sleep(2)
+        if contract:
+            if self.ib.qualifyContracts(contract):
+                self.reset_all_stock_relate_data()
+                self.stock = contract
+                self.ticker = self.ib.reqMktData(contract, '', False, False, [])
+                self.ib.sleep(2)
+            else:
+                self.show_alert("无法找到合适的标的")
 
     def getNearstExpire(self, day_limit:int=0):
         chains = self.ib.reqSecDefOptParams(self.stock.symbol, '', self.stock.secType, self.stock.conId)

@@ -85,22 +85,33 @@ class Ui_MainWindow(object):
         self.label.setGeometry(QtCore.QRect(710, 30, 60, 16))
         self.label.setObjectName("label")
         self.textBrowser_2 = QtWidgets.QTextBrowser(parent=self.tab1)
-        self.textBrowser_2.setGeometry(QtCore.QRect(570, 270, 331, 201))
+        self.textBrowser_2.setGeometry(QtCore.QRect(580, 190, 331, 201))
         self.textBrowser_2.setObjectName("textBrowser_2")
         self.label_2 = QtWidgets.QLabel(parent=self.tab1)
-        self.label_2.setGeometry(QtCore.QRect(710, 240, 60, 16))
+        self.label_2.setGeometry(QtCore.QRect(720, 160, 60, 16))
         self.label_2.setObjectName("label_2")
+        self.textBrowser_3 = QtWidgets.QTextBrowser(parent=self.tab1)
+        self.textBrowser_3.setGeometry(QtCore.QRect(1000, 50, 331, 201))
+        self.textBrowser_3.setObjectName("textBrowser_3")
+        self.label_3 = QtWidgets.QLabel(parent=self.tab1)
+        self.label_3.setGeometry(QtCore.QRect(1130, 30, 111, 16))
+        self.label_3.setObjectName("label_3")
+        self.label_4 = QtWidgets.QLabel(parent=self.tab1)
+        self.label_4.setGeometry(QtCore.QRect(1130, 280, 111, 16))
+        self.label_4.setObjectName("label_4")
+        self.textBrowser_4 = QtWidgets.QTextBrowser(parent=self.tab1)
+        self.textBrowser_4.setGeometry(QtCore.QRect(1000, 300, 331, 201))
+        self.textBrowser_4.setObjectName("textBrowser_4")
         self.tabWidget.addTab(self.tab1, "")
         self.tab2 = StrangleTab()
         self.tab2.setObjectName("tab2")
         self.tabWidget.addTab(self.tab2, "")
         self.tab3 = PositionTab()
-        self.tab3.setObjectName("tab3")
         self.tabWidget.addTab(self.tab3, "")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -139,12 +150,31 @@ class Ui_MainWindow(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">1. 下单后自动采用中间价且自动重试3次，每次采用最新中间价并向不利方向偏移0.015</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">2.勾选使用自定义价格后，不会偏移，只会多次使用该价格下单</p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">3.定时任务，可在首页查看任务，刷新查看</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">4.盈利/损失自动平仓任务，每分钟自动检查持仓状态，符合盈利损失条件则使用中间价平仓(同样重试3次)</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">5.盘后IB接口停止提供数据，则无法显示正常ask/bid ，iv等数据</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">6.电脑自动sleep后，定时脚本无法正常运行</p></body></html>"))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">4.盘后IB接口停止提供数据，则无法显示正常ask/bid ，iv等数据</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">5.电脑自动sleep后，定时脚本无法正常运行</p></body></html>"))
         self.label_2.setText(_translate("MainWindow", "提示"))
+        self.textBrowser_3.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">1. 输入股票code后，确认获取股票报价，等待x秒后当前价格显示则成功</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">2.输入期权到期周数，并确定(等待较久)。下方期权到期日输入框更新则成功</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">3.输入strike距离，并按回车获取strike，所有勾选使用的leg均需要获取</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">4.点击刷新价格按钮，leg的iv，当前价格均自动更新则成功</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">5.此时可以自动下单了</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">6.低于iv和下单差价暂未使用</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.label_3.setText(_translate("MainWindow", "下单操作顺序"))
+        self.label_4.setText(_translate("MainWindow", "平仓操作顺序"))
+        self.textBrowser_4.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">1. 进入平仓信息页面，点击获取持仓。只能获取到程序下单成功的持仓</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">2.盈利/损失平仓百分比如0.2则代表20%</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">3.盈利/损失自动平仓，每分钟会检查持仓状态，符合盈利损失条件则使用中间价平仓(同样重试3次)</p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1), _translate("MainWindow", "连接客户端"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), _translate("MainWindow", "Strangle策略"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), _translate("MainWindow", "策略信息"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab3), _translate("MainWindow", "平仓信息"))
 from UIElements.PositionTab import PositionTab
 from UIElements.StrangleTab import StrangleTab
